@@ -438,7 +438,7 @@ if (bundle || refreshed) {
   }
 }
 
-// collet/docs/knowledge/harness-workflow.md quotes these next-step lines; change both together.
+// docs/knowledge/harness-workflow.md quotes these next-step lines; change both together.
 console.log(`
 next:
   1. Fill in .collet/config.json — the project line and the conventions a change must respect.

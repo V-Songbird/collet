@@ -1,0 +1,24 @@
+# collet repository visibility and local generated files.
+# Keep the runtime, templates, catalogues, tests, eval cases and public documentation visible.
+
+# Private working material and documentation
+.private/
+docs/tasks/
+docs/decisions/
+docs/knowledge/private/
+docs/apis/private/
+
+# Machine-local agent state; shared instructions stay visible
+**/.claude/settings.local.json
+**/.claude/memory/
+CLAUDE.local.md
+AGENTS.override.md
+
+# Local planning and session state written at run time, never published
+.foreman/
+ROADMAP.jsonl
+
+# Dependency cache and operating-system metadata
+node_modules/
+.DS_Store
+Thumbs.db

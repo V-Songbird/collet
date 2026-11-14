@@ -10,7 +10,7 @@
 //
 // anneal and collet each ship alone, so each keeps this file: anneal as
 // tests/eval-harness.js and collet as tests/eval-harness.cjs. Change both
-// together; scripts/shared-copies.test.js in Slag fails when they differ.
+// together; no test compares the two repositories.
 
 const assert = require("node:assert");
 const fs = require("node:fs");

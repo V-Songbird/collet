@@ -2,11 +2,11 @@
 type: knowledge
 summary: "Collet's task, scope and check contracts; read before changing mounting, root resolution, the guard or task closure."
 related_files:
-  - collet/scripts/mount.mjs
-  - collet/hooks/lib.js
-  - collet/hooks/guard.js
-  - collet/templates/
-  - collet/tests/
+  - scripts/mount.mjs
+  - hooks/lib.js
+  - hooks/guard.js
+  - templates/
+  - tests/
 ---
 
 # Collet runtime contracts
@@ -235,7 +235,6 @@ nothing has no such field, and its config and mount output are unchanged.
 
 ## Verification
 
-Run npm run check for the repository, which also fails when a suite fails outside its tests, or
-node --test from collet/. Fixtures are self-contained and require no private notes or owner
+Run node --test from the repository root. Fixtures are self-contained and require no private notes or owner
 profile. See the [plugin README](../../README.md) for commands and current limits, and the
 [harness workflow](harness-workflow.md) for configuration and usage.

@@ -2,10 +2,10 @@
 type: knowledge
 summary: "Records user-facing collet changes by release; read when upgrading or checking when behavior changed."
 related_files:
-  - collet/README.md
-  - collet/.claude-plugin/plugin.json
-  - collet/.codex-plugin/plugin.json
-  - collet/plugin.json
+  - README.md
+  - .claude-plugin/plugin.json
+  - .codex-plugin/plugin.json
+  - plugin.json
 ---
 
 # Changelog
@@ -14,10 +14,11 @@ All notable changes to collet are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.8.0-alpha] — 2026-11-14
 
 ### Added
 
+- collet installs from the Foundry marketplace: `/plugin install collet@foundry` in Claude Code and `codex plugin add collet@foundry` in Codex. It has its own repository, `V-Songbird/collet`, with its own contributor guide, security policy and tests on Linux, Windows and macOS.
 - A plugin logo: Antigravity shows collet's chuck seal instead of a generic icon. `assets/` also holds the banner, wordmark and icon in light and dark.
 
 ### Changed

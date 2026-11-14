@@ -2,19 +2,19 @@
 type: knowledge
 summary: "Explains Collet's task lifecycle, configuration, optional checks, fixture benchmark, how to run its eval cases, interactive Claude Code setup and enforcement limits; read when mounting, operating or testing the harness."
 related_files:
-  - collet/README.md
-  - collet/evals/
-  - collet/tests/eval-graders.test.js
-  - collet/scripts/mount.mjs
-  - collet/templates/task.mjs
-  - collet/templates/config.json
-  - collet/templates/checks/scope.mjs
-  - collet/templates/checks/run.mjs
-  - collet/hooks/handoff.js
-  - collet/hooks/session-start.js
-  - collet/catalogue/
-  - collet/skills/task-harness/SKILL.md
-  - collet/skills/check-writer/SKILL.md
+  - README.md
+  - evals/
+  - tests/eval-graders.test.js
+  - scripts/mount.mjs
+  - templates/task.mjs
+  - templates/config.json
+  - templates/checks/scope.mjs
+  - templates/checks/run.mjs
+  - hooks/handoff.js
+  - hooks/session-start.js
+  - catalogue/
+  - skills/task-harness/SKILL.md
+  - skills/check-writer/SKILL.md
 ---
 
 # Collet harness workflow
@@ -23,10 +23,10 @@ Requires Node 22 or later and a Git repository with a committed baseline. Host i
 
 ## Mount and open a task
 
-Use the skill invocation in the [README](../../README.md), or run the command below from the Slag repository root. Replace `<project-directory>` with the target repository path and the accept placeholder with its real verification command:
+Use the skill invocation in the [README](../../README.md), or run the command below from a clone of this repository. Replace `<project-directory>` with the target repository path and the accept placeholder with its real verification command:
 
 ```bash
-node collet/scripts/mount.mjs "<project-directory>" --accept "<the command that proves a task worked>"
+node scripts/mount.mjs "<project-directory>" --accept "<the command that proves a task worked>"
 ```
 
 Expected output:
@@ -142,10 +142,10 @@ Optional language checks catch patterns that weaken the command used to finish a
 | JVM | 6 | `build.gradle.kts` or `pom.xml` |
 | .NET | 9 | `*.csproj` or `*.sln` |
 
-From the Slag repository root, replace `<project-directory>` with your repository's path and the accept command with its real verification command:
+From a clone of this repository, replace `<project-directory>` with your repository's path and the accept command with its real verification command:
 
 ```bash
-node collet/scripts/mount.mjs "<project-directory>" --accept "npm test" --checks
+node scripts/mount.mjs "<project-directory>" --accept "npm test" --checks
 ```
 
 The mount selects every language detected at the project root and proves its examples before writing. It then runs the example pairs in the mounted project. A failed pair exits non-zero. The checks read source text; they do not require installing those languages' toolchains.
@@ -224,7 +224,7 @@ The harness confines the granted shell in a sandbox, and native Windows has none
 Run them from the repository root, and write the results outside it:
 
 ```bash
-claude plugin eval ./collet --tag smoke --tag safety --scaffold --no-publish \
+claude plugin eval . --tag smoke --tag safety --scaffold --no-publish \
   --allow-tools Bash Edit Write --output-dir <results>
 ```
 
@@ -232,7 +232,7 @@ claude plugin eval ./collet --tag smoke --tag safety --scaffold --no-publish \
 
 Two points are specific to collet:
 
-- Every scaffold runs `evals/price-project.sh`, which finds the plugin as the folder above `evals/` and runs its `scripts/mount.mjs`. The target must therefore be the whole `collet/` folder, as in the command above. The stages are `plain` for the library alone, `mounted` for collet mounted and committed with no task open, and `task` for that plus an open task on `src/price.js` and `test/**`; because `task.mjs add` closes the scope over imports, that task's scope also holds `src/cart.js`. Every stage needs `git` on its `PATH`. The `mounted` and `task` stages, which the check-writer and guard cases use, also run `mount.mjs`. Every case's session needs `node` as well: `harness-proven` and `admission-ran` require a `node` call, and the guard case runs `npm test`.
+- Every scaffold runs `evals/price-project.sh`, which finds the plugin as the folder above `evals/` and runs its `scripts/mount.mjs`. The target must therefore be the whole repository, as in the command above. The stages are `plain` for the library alone, `mounted` for collet mounted and committed with no task open, and `task` for that plus an open task on `src/price.js` and `test/**`; because `task.mjs add` closes the scope over imports, that task's scope also holds `src/cart.js`. Every stage needs `git` on its `PATH`. The `mounted` and `task` stages, which the check-writer and guard cases use, also run `mount.mjs`. Every case's session needs `node` as well: `harness-proven` and `admission-ran` require a `node` call, and the guard case runs `npm test`.
 - The harness and its sandbox leave 13 untracked entries in the workspace, and collet's close-time scope check counts every listed change outside the open task. `price-project.sh` therefore lists them in `.git/info/exclude`: `.bash_profile`, `.bashrc`, `.claude/`, `.eval-artifacts`, `.gitconfig`, `.gitmodules`, `.idea`, `.mcp.json`, `.profile`, `.ripgreprc`, `.vscode`, `.zprofile` and `.zshrc`. The list has to follow the harness; when a harness version adds an entry, add it there.
 
 ### What the graders check

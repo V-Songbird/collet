@@ -1,0 +1,52 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Preserve committed line endings
+        run: git config --global core.autocrlf false
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      - name: Manifests and hook files parse
+        run: node -e 'for (const f of [".claude-plugin/plugin.json",".codex-plugin/plugin.json","plugin.json","hooks/hooks.json","hooks/codex-hooks.json","hooks.json"]) JSON.parse(require("fs").readFileSync(f,"utf8"))'
+
+      - name: Markdown anchors and README nav
+        run: node scripts/git-hooks/check-readme-nav.js
+
+      - name: Run tests
+        run: node --test
+
+  runtime-check:
+    name: Runtime tests
+    needs: [test]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every runtime test job to pass
+        env:
+          RESULT: ${{ needs.test.result }}
+        run: test "$RESULT" = success
