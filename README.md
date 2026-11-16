@@ -245,7 +245,6 @@ A project that already mounted collet keeps its own copy of the scripts until yo
 - A collet refusal and a verified close have been observed in long sessions: interactive on Claude Code with a script answering the prompts, interactive in the Antigravity IDE across two conversations with a person answering, and headless on Codex CLI with a script answering.
 - The open task carries over a manual `/compact` on Claude Code and an automatic compaction on headless Codex CLI, observed with a script answering and the context window lowered per run. Automatic compaction on Claude Code, and compaction in an interactive Codex session, are unverified.
 - These results come from runs on specific host versions, some with a script rather than a person answering the prompts.
-- Installing from the Foundry marketplace has not been observed on any host.
 - Unit tests supply host-shaped events to the hooks. They do not prove live host integration.
 
 ## The numbers
