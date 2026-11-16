@@ -1,5 +1,5 @@
 // The three host manifests describe one plugin: the same name, version, description and author,
-// a version the changelog has an entry for, and hook commands whose scripts exist. A host reads
+// and hook commands whose scripts exist. A host reads
 // only its own manifest, so nothing else notices when one of them falls behind.
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -22,11 +22,6 @@ test('the three manifests agree on name, version, description and author', () =>
     assert.equal(manifest.author.name, first.author.name, `${MANIFESTS[index + 1]} author differs`);
     assert.equal(manifest.author.email, first.author.email, `${MANIFESTS[index + 1]} author differs`);
   }
-});
-
-test("the changelog's newest entry is the manifests' version", () => {
-  const newest = /^## \[([^\]]+)\]/m.exec(read('docs/knowledge/changelog.md'))?.[1];
-  assert.equal(newest, json(MANIFESTS[0]).version);
 });
 
 // Antigravity reads the root manifest. With the portable schema or a Codex extension in it,

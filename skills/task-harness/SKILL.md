@@ -10,10 +10,7 @@ description: >-
   from ordinary project work, from a new or empty repository, or from "set up
   this project". Not for writing a new check, which the check-writer skill
   does.
-license: MIT
 compatibility: Requires Node 22 or later and git.
-metadata:
-  version: "1.2"
 ---
 
 # Task harness

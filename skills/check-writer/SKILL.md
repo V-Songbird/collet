@@ -8,10 +8,7 @@ description: >-
   has a shape that could be caught by a machine. ONLY when the project already
   has a `.collet/` directory. Not for mounting the harness, which task-harness
   does.
-license: MIT
 compatibility: Requires Node 22 or later and a project with collet already mounted.
-metadata:
-  version: "1.1"
 ---
 
 # Check writer
