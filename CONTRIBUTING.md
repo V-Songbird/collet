@@ -23,8 +23,9 @@ One package serves Claude Code, Codex and Antigravity.
 plugin.json             # Antigravity metadata and the same version
 hooks.json              # Antigravity event wiring
 LICENSE                 # MIT
-assets/                 # the plugin icons the manifests name
-README.md               # the user guide: how it works, settings, install, results
+assets/                 # the plugin icons the manifests name, the banners, host cards, Ember scene and hero graphic the README shows
+README.md               # the front page: what it is, install, limits, results
+docs/knowledge/         # the detail pages: how it works, settings, benchmarks
 skills/                 # skills read by every host
 ├── task-harness/       # mounts the harness and reports on it
 └── check-writer/       # adds a check
@@ -41,7 +42,7 @@ evals/                  # eval cases for `claude plugin eval`, with fixture scri
 tests/                  # the node:test suite
 ```
 
-The README is text only and names the host beside every host-specific instruction and result. Each result identifies its host, model, date and sample size; keep losses and limits, show `Not measured` where evidence is absent, and never present a Claude Code result as a Codex result. Keep the README in step with the code: a limit leaves it only with the change that resolves it.
+The README and the pages under `docs/knowledge/` name the host beside every host-specific instruction and result. Each result identifies its host, model, date and sample size; keep losses and limits, show `Not measured` where evidence is absent, and never present a Claude Code result as a Codex result. Keep the README in step with the code: a limit leaves it only with the change that resolves it.
 
 ---
 
