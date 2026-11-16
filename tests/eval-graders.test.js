@@ -70,7 +70,11 @@ const ADDED = ['.bash_profile', '.bashrc', '.claude/', '.eval-artifacts', '.gitc
 const stages = {};
 before(() => {
   env.GIT_CONFIG_GLOBAL = join(project(), 'gitconfig');
-  writeFileSync(env.GIT_CONFIG_GLOBAL, '[core]\n\tlongpaths = true\n');
+  // No background maintenance: after a commit Git starts a detached
+  // `git maintenance run --auto`, which holds .git/objects/maintenance.lock for
+  // a moment, and a copy that lists the lock and then finds it gone fails with
+  // ENOENT. Measured on macOS in anneal's twin of this test: 54 of 250 copies.
+  writeFileSync(env.GIT_CONFIG_GLOBAL, '[core]\n\tlongpaths = true\n[maintenance]\n\tauto = false\n[gc]\n\tauto = 0\n');
   const plain = project();
   git(plain, 'init', '-q');
   for (const [file, content] of Object.entries(ORIGINAL)) write(plain, file, content);
