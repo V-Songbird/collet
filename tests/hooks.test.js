@@ -754,6 +754,29 @@ test('Antigravity finds the harness from absolute file targets when workspace co
   }
 });
 
+// The shapes a live Antigravity CLI session sent: a created file as write_file with Path, Content
+// and Overwrite, an edit as edit_file with Path, Target and Replacement.
+test('Antigravity write_file and edit_file are held to the task, with and without workspace context', () => {
+  const root = ready();
+  task(root, ['add', '--title', 'window', '--why', 'w', '--scope', 'src/cli.mjs']);
+  const calls = {
+    write_file: (file) => ({ Path: file, Content: 'x', Overwrite: true }),
+    edit_file: (file) => ({ Path: file, Target: 'world', Replacement: 'there' }),
+  };
+  for (const [name, args] of Object.entries(calls)) {
+    for (const workspacePaths of [[root], []]) {
+      const run = (file) => hook('guard.js', root, {
+        toolCall: { name, args: args(join(root, 'src', file)) },
+        workspacePaths,
+      }, { args: ['antigravity'], cwd: PLUGIN, project: null });
+      const answer = JSON.parse(run('theme.mjs').stdout);
+      assert.equal(answer.decision, 'deny', `${name} ${workspacePaths.length}`);
+      assert.match(answer.reason, /src\/theme\.mjs is outside the open task/);
+      assert.deepEqual(JSON.parse(run('cli.mjs').stdout), { decision: 'allow' }, `${name} ${workspacePaths.length}`);
+    }
+  }
+});
+
 test('Antigravity finds the harness from an absolute command Cwd when workspace context is absent', () => {
   const root = ready();
   task(root, ['add', '--title', 'window', '--why', 'w', '--scope', 'src/cli.mjs']);

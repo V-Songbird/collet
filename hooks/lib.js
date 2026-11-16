@@ -23,8 +23,8 @@ function antigravityDirectory(event) {
   if (name === 'run_command') {
     return typeof args.Cwd === 'string' && isAbsolute(args.Cwd) ? args.Cwd : null;
   }
-  if (!['write_to_file', 'replace_file_content', 'multi_replace_file_content'].includes(name)) return null;
-  const target = args.AbsolutePath ?? args.TargetFile;
+  if (!['write_to_file', 'replace_file_content', 'multi_replace_file_content', 'write_file', 'edit_file'].includes(name)) return null;
+  const target = args.AbsolutePath ?? args.TargetFile ?? args.Path;
   return typeof target === 'string' && isAbsolute(target) ? dirname(target) : null;
 }
 
@@ -174,12 +174,14 @@ export function emit(event, context) {
 // Antigravity names its tools differently and passes their arguments in PascalCase. The scope
 // check speaks Claude Code's vocabulary, so the call is translated here, at the wire, and the
 // check stays one function that runs the same way in a session, at commit time and in CI.
-const file = (args) => ({ file_path: args.AbsolutePath ?? args.TargetFile ?? null });
+const file = (args) => ({ file_path: args.AbsolutePath ?? args.TargetFile ?? args.Path ?? null });
 const ANTIGRAVITY_TOOLS = {
   run_command: (args) => ({ tool: 'Bash', input: { command: args.CommandLine ?? '' }, cwd: args.Cwd }),
   write_to_file: (args) => ({ tool: 'Write', input: file(args) }),
   replace_file_content: (args) => ({ tool: 'Edit', input: file(args) }),
   multi_replace_file_content: (args) => ({ tool: 'Edit', input: file(args) }),
+  write_file: (args) => ({ tool: 'Write', input: file(args) }),
+  edit_file: (args) => ({ tool: 'Edit', input: file(args) }),
 };
 
 // The two payload shapes a PreToolUse hook can be handed, and the two answers. Claude Code and
