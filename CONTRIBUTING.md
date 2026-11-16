@@ -23,6 +23,7 @@ One package serves Claude Code, Codex and Antigravity.
 plugin.json             # Antigravity metadata and the same version
 hooks.json              # Antigravity event wiring
 LICENSE                 # MIT
+assets/                 # the plugin icons the manifests name
 README.md               # the user guide: how it works, settings, install, results
 skills/                 # skills read by every host
 ├── task-harness/       # mounts the harness and reports on it

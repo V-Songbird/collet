@@ -28,6 +28,10 @@
     "developerName": "Victor Villegas",
     "category": "Productivity",
     "capabilities": ["Interactive", "Read", "Write"],
-    "websiteURL": "https://github.com/V-Songbird/collet"
+    "websiteURL": "https://github.com/V-Songbird/collet",
+    "composerIcon": "./assets/icon-on-light.png",
+    "logo": "./assets/icon-on-light.png",
+    "logoDark": "./assets/icon-on-dark.png",
+    "brandColor": "#3F8F4F"
   }
 }

@@ -52,3 +52,17 @@ test('every skill folder holds a SKILL.md', () => {
   assert.ok(skills.length);
   for (const skill of skills) assert.ok(existsSync(join(PLUGIN, 'skills', skill.name, 'SKILL.md')), skill.name);
 });
+
+// A host loads the icons its manifest or a skill's openai.yaml names; a missing file shows no icon.
+test('every icon a manifest or openai.yaml names exists', () => {
+  const named = [];
+  const codex = json('.codex-plugin/plugin.json').interface;
+  for (const key of ['composerIcon', 'logo', 'logoDark']) named.push(codex[key]);
+  named.push(json('plugin.json').logo);
+  for (const skill of readdirSync(join(PLUGIN, 'skills'))) {
+    const yaml = read(`skills/${skill}/agents/openai.yaml`);
+    for (const [, file] of yaml.matchAll(/^\s*icon_(?:small|large): "([^"]+)"/gm)) named.push(`skills/${skill}/${file.replace('./', '')}`);
+  }
+  assert.equal(named.length, 3 + 1 + 4);
+  for (const file of named) assert.ok(statSync(join(PLUGIN, file)).isFile(), `icon missing: ${file}`);
+});
