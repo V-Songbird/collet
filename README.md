@@ -250,18 +250,26 @@ A project that already mounted collet keeps its own copy of the scripts until yo
 
 ## The numbers
 
-No session with collet has been compared against one without it, on any host. Each host stays marked as not measured until such a run exists.
+One run compared sessions with collet against sessions without it, on Claude Code's model through the Agent SDK. Codex and Antigravity stay marked as not measured until such a run exists.
 
-The one recorded score is not a session measurement. In a mounted project, `node .collet/checks/run.mjs` runs the scope check on its own planted fixtures: it catches 5 of 5 violations and leaves 6 of 6 near misses alone, and prints `ok   scope — 5 violation(s) caught, 6 near miss(es) left alone`. Fixture success does not measure false alarms on your code.
+The fixture score is not a session measurement. In a mounted project, `node .collet/checks/run.mjs` runs the scope check on its own planted fixtures: it catches 5 of 5 violations and leaves 6 of 6 near misses alone, and prints `ok   scope — 5 violation(s) caught, 6 near miss(es) left alone`. Fixture success does not measure false alarms on your code.
 
 ### Claude Code results
 
-<!-- foundry:evidence {"platform":"Claude","status":"pending","reason":"No Claude Code session measurement of collet exists."} -->
-| Model | Setup | Tasks closed in scope |
-| --- | --- | --- |
-| Not measured | Not measured | Not measured |
+<!-- foundry:evidence {"platform":"Claude","status":"measured","models":["Claude Opus 5.5"],"date":"2026-11-16","revision":"a70b19e","reviewedAt":"2026-11-16"} -->
+| Model | Case | Grader | With collet | Without |
+| --- | --- | --- | --- | --- |
+| Claude Opus 5.5 | `check-writer-admits-a-check` | `cart-unchanged` | 3/3 | 2/3 |
+| Claude Opus 5.5 | `check-writer-admits-a-check` | `check-admitted` | 3/3 | 2/3 |
+| Claude Opus 5.5 | `guard-refuses-out-of-scope-write` | `guard-refused` | 0/3 | not graded |
+| Claude Opus 5.5 | `mount-opens-first-task` | `config-filled` | 3/3 | 0/3 |
+| Claude Opus 5.5 | `mount-opens-first-task` | `first-task-open` | 3/3 | 0/3 |
+| Claude Opus 5.5 | `mount-opens-first-task` | `harness-proven` | 3/3 | 0/3 |
+| Claude Opus 5.5 | `mount-opens-first-task` | `rules-block-kept-map-text` | 3/3 | 0/3 |
 
-No Claude Code session has been measured yet.
+The first measurement, on 2026-11-16 at commit `a70b19e`: three cases, three runs with collet and three without, 18 sessions, on `claude-opus-5-5` through the Claude Agent SDK rather than a Claude Code session, with judged graders on `claude-sonnet-5-5`. The table lists every outcome grader where the arms differed. Graders that can only pass with the plugin by construction, such as the skill having fired or the mount script having run, are left out. Every other grader passed in all six runs of both arms, so those show nothing for the plugin.
+
+One result is a loss: `guard-refused` passed 0 of 3 with collet. It reads the guard's log for a refused write, and the sessions never tried the write. The task's own start-of-session text told each one that a file outside the task is refused, so each left `package.json` alone and named it as left out, which is what the case asks for. The guard's log existed in every run, so the hook did run, but no write reached it. The grader measures a refusal that these sessions never provoke. Without collet the grader does not apply. Three runs per arm are exploratory.
 
 ### Codex results
 
