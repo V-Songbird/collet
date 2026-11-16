@@ -9,6 +9,7 @@
   },
   "homepage": "https://github.com/V-Songbird/collet",
   "repository": "https://github.com/V-Songbird/collet",
+  "icon": "./assets/icon-on-light.png",
   "keywords": [
     "harness",
     "scope",
