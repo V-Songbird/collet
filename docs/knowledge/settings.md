@@ -10,9 +10,9 @@ related_files:
 
 # Collet settings
 
-This page lists every setting collet reads, with its default and effect. The README shows the three most used ones under [Settings](../../README.md#settings).
+This page lists every setting Collet reads, with its default and effect. The README shows the three most used ones under [Settings](../../README.md#settings).
 
-Values live in `.collet/config.json`. No environment variable or secret is read by collet's settings; the hooks use only the project directory your host names.
+Values live in `.collet/config.json`. No environment variable or secret is read by Collet's settings; the hooks use only the project directory your host names.
 
 | Name | Required | Default | What it does |
 | --- | --- | --- | --- |

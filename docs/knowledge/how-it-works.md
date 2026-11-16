@@ -10,9 +10,9 @@ related_files:
   - templates/task.mjs
 ---
 
-# How collet works
+# How Collet works
 
-This page says what collet does to a coding session, part by part. It is for a user who wants to predict what collet will allow, refuse or report. The short form is in the README, under [How it works](../../README.md#how-it-works).
+This page says what Collet does to a coding session, part by part. It is for a user who wants to predict what Collet will allow, refuse or report. The short form is in the README, under [How it works](../../README.md#how-it-works).
 
 ## Contents
 
@@ -31,7 +31,7 @@ Mounting creates `.collet/` in your project and adds a rules block to `AGENTS.md
 - **Finished is not an opinion.** Closing runs the accept command itself. A non-zero exit leaves the task open.
 - **Drift is caught at close, or refused as it happens when the project asks for that.** A write outside the open task goes ahead with a note that names the path. `close` then fails until the task is widened or the change is undone. With `refuse_out_of_scope_writes` set to `true`, the guard refuses that write instead. The harness's own files and an edit a check catches are refused either way.
 - **The guard reads what it can read with certainty.** Write tools, patches and these shell forms: redirects, `cp`, `mv`, `rm`, `tee`, `sed -i` and the common PowerShell cmdlets. It also reads `rm -rf` on a directory.
-- **JavaScript and TypeScript imports expand the list.** Name the module that owns the behaviour, and collet adds its relative imports, one level deep, with a reason for each. It stops after 12 added files, so check a module with more imports yourself. For other languages, derive the scope by reading the code.
+- **JavaScript and TypeScript imports expand the list.** Name the module that owns the behaviour, and Collet adds its relative imports, one level deep, with a reason for each. It stops after 12 added files, so check a module with more imports yourself. For other languages, derive the scope by reading the code.
 - **Covered means caught.** Every check ships with a planted mistake and a near miss, a lookalike it must leave alone. A failed pair is reported and never counted as coverage.
 - **Closing needs the scope held and the command green.** It first checks the changed files against the task, including untracked ones, against the Git baseline, then runs the accept command. Either half failing leaves the task open, and a check that cannot run also prevents closing.
 
@@ -59,13 +59,13 @@ The rules block always goes into `AGENTS.md`. It also goes into `CLAUDE.md` when
 
 The mount reads Markdown approximately. An `@AGENTS.md` inside a code block it does not recognize, such as a fence nested in a list item or indented code behind blockquote markers, still counts as the import. An unclosed fence in a list item, or a fence inside an HTML block, can hide an import that the host would count.
 
-A second mount refreshes collet's own scripts: `task.mjs`, `state.mjs`, the check runner and the built-in scope check with its examples. Your `config.json`, `unverified.md` and your own checks are kept, and so is a `source.mjs` you edited. To take this version's fixes to an edited `source.mjs`, remove it and mount again. The rules block is replaced and your text around it is left alone.
+A second mount refreshes Collet's own scripts: `task.mjs`, `state.mjs`, the check runner and the built-in scope check with its examples. Your `config.json`, `unverified.md` and your own checks are kept, and so is a `source.mjs` you edited. To take this version's fixes to an edited `source.mjs`, remove it and mount again. The rules block is replaced and your text around it is left alone.
 
 Commit what lands in `.collet/`: its `.gitignore` already leaves out what is derived or belongs to your machine. The mount installs no commit or push hook and no CI workflow.
 
 On Claude Code, the skill can also offer permission ask rules for each `ask_first` item with a clear command, such as `Bash(npm publish *)` and `PowerShell(npm publish *)`. A rule guards only the shell tool it names, so both are offered and you confirm each one. The mount adds the rules you confirm to `permissions.ask` in the project's `.claude/settings.json`, keeping everything already there. With no confirmed rule it writes no settings file. It never touches your user settings, `.claude/settings.local.json` or another host's configuration. A headless run cannot answer the prompt such a rule raises, so the host refuses the matching command there.
 
-A project that already mounted collet keeps its own copy of the scripts until you mount again, also after you update the plugin.
+A project that already mounted Collet keeps its own copy of the scripts until you mount again, also after you update the plugin.
 
 ## Permission prompts on Claude Code
 
@@ -90,11 +90,11 @@ When a guard refuses a write, it names the path and the remedy that fits the ref
 
 ## Alongside a planning tool
 
-A planning tool that keeps `ROADMAP.jsonl` or `.foreman/` owns the plan. collet owns the session boundary: the open task's files and the accept command. A project with a roadmap mounts like any other, and collet never reads the roadmap or enforces the files an entry lists.
+A planning tool that keeps `ROADMAP.jsonl` or `.foreman/` owns the plan. Collet owns the session boundary: the open task's files and the accept command. A project with a roadmap mounts like any other, and Collet never reads the roadmap or enforces the files an entry lists.
 
 To tie a task to an entry of [Foreman](https://github.com/V-Songbird/foreman), the roadmap plugin from the same marketplace, open it with `--foreman <id>`. The id has 1 to 64 letters, digits, `.`, `_` or `-`, and starts with a letter or digit. The id is only a label, shown by `status` and `list`. If the entry's handoff names a verification command, pass it as `--accept`.
 
-When that task closes with its checks and accept command passing, `close` prints the Foreman step that marks the entry `awaiting_acceptance`. It carries `<commit sha>` and `<Foreman plugin root>` for you to fill in after committing. collet does not run it and does not change the roadmap files. A failing close, or a task opened without `--foreman`, prints no step.
+When that task closes with its checks and accept command passing, `close` prints the Foreman step that marks the entry `awaiting_acceptance`. It carries `<commit sha>` and `<Foreman plugin root>` for you to fill in after committing. Collet does not run it and does not change the roadmap files. A failing close, or a task opened without `--foreman`, prints no step.
 
 For a task with an id, what nobody checked belongs in the entry's `unverified:` note lines. A passing close prints the `--unverified` text and then the `--left-out` text for you to add there, and writes neither to `.collet/unverified.md`. The scope check never refuses a write to `ROADMAP.jsonl` or `.foreman/`.
 

@@ -9,7 +9,7 @@ related_files:
 
 # Collet benchmarks
 
-This page holds every measurement collet publishes, with its method and its limits. The README shows the same table under [The numbers](../../README.md#the-numbers).
+This page holds every measurement Collet publishes, with its method and its limits. The README shows the same table under [The numbers](../../README.md#the-numbers).
 
 ## Contents
 
@@ -20,12 +20,12 @@ This page holds every measurement collet publishes, with its method and its limi
 
 ## Claude Code, 2026-11-16
 
-One run compared sessions with collet against sessions without it, on Claude Code's model through the Agent SDK. The run was on 2026-11-16 at commit `a70b19e`. It used three cases, three runs with collet and three without, 18 sessions, on `claude-opus-5-5` through the Claude Agent SDK rather than a Claude Code session. Judged graders ran on `claude-sonnet-5-5`.
+One run compared sessions with Collet against sessions without it, on Claude Code's model through the Agent SDK. The run was on 2026-11-16 at commit `a70b19e`. It used three cases, three runs with Collet and three without, 18 sessions, on `claude-opus-5-5` through the Claude Agent SDK rather than a Claude Code session. Judged graders ran on `claude-sonnet-5-5`.
 
 The table lists every outcome grader where the arms differed. Graders that can only pass with the plugin by construction, such as the skill having fired or the mount script having run, are left out. Every other grader passed in all six runs of both arms, so those show nothing for the plugin.
 
 <!-- foundry:evidence {"platform":"Claude","status":"measured","models":["Claude Opus 5.5"],"source":"docs/knowledge/benchmarks.md","date":"2026-11-16","revision":"a70b19e","reviewedAt":"2026-11-16"} -->
-| Model | Case | Grader | With collet | Without |
+| Model | Case | Grader | With Collet | Without |
 | --- | --- | --- | --- | --- |
 | Claude Opus 5.5 | `check-writer-admits-a-check` | `cart-unchanged` | 3/3 | 2/3 |
 | Claude Opus 5.5 | `check-writer-admits-a-check` | `check-admitted` | 3/3 | 2/3 |
@@ -41,7 +41,7 @@ Three runs per arm are exploratory.
 
 `guard-refused` passed 0 of 3 with collet. It reads the guard's log for a refused write, and the sessions never tried the write. The task's own start-of-session text told each one that a file outside the task is refused. Each left `package.json` alone and named it as left out, which is what the case asks for.
 
-The guard's log existed in every run, so the hook did run, but no write reached it. The grader measures a refusal that these sessions never provoke. Without collet the grader does not apply.
+The guard's log existed in every run, so the hook did run, but no write reached it. The grader measures a refusal that these sessions never provoke. Without Collet the grader does not apply.
 
 ## The fixture score
 

@@ -8,9 +8,9 @@ related_files:
 
 # Collet limits
 
-This page states each limit of collet in full. The README names each one in a line, under [Good to know](../../README.md#good-to-know).
+This page states each limit of Collet in full. The README names each one in a line, under [Good to know](../../README.md#good-to-know).
 
-collet is experimental. It has no support or stability promise, and it can change or disappear without a migration path.
+Collet is experimental. It has no support or stability promise, and it can change or disappear without a migration path.
 
 No open task means no enforcement. That is deliberate.
 
@@ -23,10 +23,10 @@ No open task means no enforcement. That is deliberate.
 | JavaScript skips | The checks recognize Jest and Vitest calls and simple native `node:test` options such as `{ skip: true }` and `{ only: true }`. Dynamic calls, quoted option keys and complex option objects are outside that coverage. |
 | Match counts | Bundle checks compare each detector's match count in changed files against `HEAD`; untracked files start at zero. An increase fails unless the matches moved. Replacing one match with another can leave the count unchanged, and removing an identical line from an unrelated file reads as a move. |
 | Split files | The write-time check compares an edit only with that file's own text, so it refuses matches moved into a new file although closing accepts them. To split a file, copy it with a shell command or `git mv`, then trim each copy with edits that only remove lines. |
-| Rules files | Closing treats the text between the collet markers as the harness's own. While a task is open, the guard still refuses writes to a rules file the task does not list. |
+| Rules files | Closing treats the text between the Collet markers as the harness's own. While a task is open, the guard still refuses writes to a rules file the task does not list. |
 | Closing | It needs the `--left-out` and `--unverified` lines, strict live checks and a passing accept command. An unavailable `HEAD` or unreadable source is reported as skipped, and skipped checks prevent closing. Custom checks need a working-tree check to allow it. The scope check covers only the mounted directory, so a mount below the Git root sees only its own directory. |
 | Hook timeout | A host cuts a hook short at 10 seconds and discards its answer. Claude Code documents that the tool call then goes ahead; Codex and Antigravity are not checked. While a task is open, the guard logs each call in `.collet/guard-log.jsonl`, and the next guard call, `status` and `close` report a cut-short call. A cut-short session start or handoff is reported at the next session start, and `.collet/handoff.md` may be missing or stale. Hook errors fail open. None of this refuses anything. |
-| Invisible text | Text collet states to the session or records leaves out invisible characters a model reads and a person does not see. `task.mjs` and `mount.mjs` refuse them where that text is written, and name the field and the code points. |
+| Invisible text | Text Collet states to the session or records leaves out invisible characters a model reads and a person does not see. `task.mjs` and `mount.mjs` refuse them where that text is written, and name the field and the code points. |
 | Fixture score | It does not measure false alarms on your code. A green accept command means one command exited zero and the writes stayed inside a list someone drew. It does not mean the work is correct. |
 | Live runs | Mounting and check writing have run in Claude Code, in headless Codex CLI sessions and in headless Antigravity CLI sessions without `--sandbox`. Both are unverified in the Antigravity IDE. |
 | Refusal and close | A refusal and a verified close were observed in long sessions: interactive on Claude Code with a script answering the prompts, interactive in the Antigravity IDE across two conversations with a person answering, and headless on Codex CLI with a script answering. |
