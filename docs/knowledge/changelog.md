@@ -23,6 +23,7 @@ All notable changes to collet are documented here. The format follows
 
 ### Changed
 
+- The README has the layout the other Foundry plugins share: install steps for each host, current limits under Good to know, and each host's results marked as not measured under The numbers.
 - The plugin description on every host says what happens since 0.7.0-alpha: a write outside the open task fails the close, and the guard refuses it as it happens only when the project asks for that.
 
 ### Fixed
