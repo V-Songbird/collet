@@ -25,7 +25,7 @@ hooks.json              # Antigravity event wiring
 LICENSE                 # MIT
 assets/                 # the plugin icons the manifests name, the banners, host cards, Ember scene and hero graphic the README shows
 README.md               # the front page: what it is, install, limits, results
-docs/knowledge/         # the detail pages: how it works, settings, benchmarks
+docs/knowledge/         # the detail pages: how it works, settings, limits, benchmarks
 skills/                 # skills read by every host
 ├── task-harness/       # mounts the harness and reports on it
 └── check-writer/       # adds a check
@@ -52,7 +52,7 @@ The README and the pages under `docs/knowledge/` name the host beside every host
 
 **Templates are copied into every project that mounts collet.** A change under `templates/` changes each later mount; cover it with a test and say so in the release notes.
 
-**Hooks run on matching tool calls and session events.** Keep them fast, keep network calls out, and test on Windows, Linux and macOS. A new hook event needs an entry in `hooks/hooks.json`, `hooks/codex-hooks.json` and, when Antigravity has the event, the root `hooks.json`. Codex users must review and trust a new or changed hook in `/hooks`; say so in the release notes. Each Codex hook has one `command` and no `commandWindows`: Codex fills in `${PLUGIN_ROOT}` itself, and a Windows override broke the guard when it was tried.
+**Hooks run on matching tool calls and session events.** Keep them fast, keep network calls out, and test on Windows, Linux and macOS. A new hook event needs an entry in `hooks/hooks.json`, `hooks/codex-hooks.json` and, when Antigravity has the event, the root `hooks.json`. Codex users must review and trust a new or changed hook in `/hooks`; say so in the release notes. Each Codex hook has one `command` and no `commandWindows`, because Codex fills in `${PLUGIN_ROOT}` itself.
 
 **The root `plugin.json` is Antigravity's manifest.** It carries no `$schema` and no `com.openai` extension, so Codex keeps reading `.codex-plugin/plugin.json` and finds its hooks.
 
@@ -72,7 +72,7 @@ It needs Node.js 22 or later, Git and no dependency installation. CI runs it on 
 
 The suite feeds each hook the events a host sends and grades the eval cases without a model. It does not establish that a Claude Code, Codex or Antigravity installation has enabled or trusted the hooks; only a session on that host shows that. `claude plugin validate .` and `agy plugin validate .` check the package shape; the second warns that `hooks/hooks.json`, Claude Code's file, is never loaded.
 
-Things that have bitten before:
+Pitfalls in the suite:
 
 - `package.json` makes every `.js` file an ES module. CommonJS files carry `.cjs`, and `scripts/git-hooks/` has its own `package.json` that says `commonjs`, because its files are shared with other plugins.
 - `tests/eval-harness.cjs` has a twin: anneal keeps the same file as `tests/eval-harness.js`, and `templates/state.mjs` holds a copy of anneal's invisible-character pattern. Change each pair together; no test compares the two repositories.

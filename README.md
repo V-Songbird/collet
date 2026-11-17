@@ -123,7 +123,7 @@ codex plugin marketplace add V-Songbird/foundry
 codex plugin add collet@foundry
 ```
 
-Open `/hooks` in Codex CLI and trust the plugin's `SessionStart`, `PreToolUse` and `PreCompact` hooks. A changed hook definition or script needs another review; see [Codex hook trust](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks). Then start a new Codex session.
+Open `/hooks` in Codex CLI and trust the plugin's `SessionStart`, `PreToolUse` and `PreCompact` hooks. A changed hook registration needs another review; a changed hook script does not. See [Codex hook trust](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks). Then start a new Codex session.
 
 ### Antigravity
 

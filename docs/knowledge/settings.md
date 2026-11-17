@@ -32,7 +32,7 @@ With a list, both also say that every other step goes ahead until the accept com
 
 ## Kill switch
 
-Create `.collet/off` and every session guard goes silent. Committed checks keep running.
+Create `.collet/off` and every session guard goes silent. Committed checks keep running. Create it while no task is open: while one is open, the guard refuses the write as harness state.
 
 ## A refused write
 
