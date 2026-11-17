@@ -290,6 +290,17 @@ function reportUnfinished(id, limit = 3) {
 }
 
 /**
+ * A task that closes with no guard record at all. The guard logs a start for every call it judges,
+ * so none means no hook ran while the task was open: the host skipped them, they are not trusted
+ * there, or the work was done by hand. The checks at close still ran; nothing judged a call before it.
+ */
+function reportUnjudged(id) {
+  if (guardLog().some((entry) => entry.start && entry.task === id)) return;
+  console.log('\n  The guard judged no call during this task, so its hooks may not be running in this host.');
+  console.log('  The checks at close ran; no write or command was checked before it happened.');
+}
+
+/**
  * After a task closes, the log without what no command reads any more: the task's calls that
  * finished, their plain finish records and the markers that reported its calls cut short. Every
  * refusal, every call that never finished, every other task's record and every line that does not
@@ -534,6 +545,7 @@ switch (command) {
     // The handoff described a task that is now finished. Left behind, it is stated at every
     // future session start as if the work were still open.
     rmSync(HANDOFF, { force: true });
+    reportUnjudged(entry.id);
     pruneGuardLog(entry.id);
 
     console.log(`task ${entry.id} closed. Nothing changed outside its files, and the accept command exited 0.`);

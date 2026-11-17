@@ -102,14 +102,14 @@ For a task with an id, what nobody checked belongs in the entry's `unverified:` 
 
 Optional bundles catch patterns that weaken the command that finishes a task, such as skipped tests, empty test bodies, blanket suppressions and commands that hide test failures. They read source text and need no toolchain.
 
-| Language | Checks | Root marker |
+| Language | Checks | Detected at the project root by any of |
 | --- | --- | --- |
-| JavaScript and TypeScript | 11, plus 1 opt-in | `package.json` |
-| Python | 8 | `pyproject.toml` |
-| Go | 5 | `go.mod` |
-| Rust | 7 | `Cargo.toml` |
-| JVM | 6 | `build.gradle.kts` or `pom.xml` |
-| .NET | 9 | `*.csproj` or `*.sln` |
+| JavaScript and TypeScript | 11, plus 1 opt-in | `package.json`, `tsconfig.json` or a lockfile (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `bun.lock`) |
+| Python | 8 | `pyproject.toml`, `requirements.txt`, `setup.cfg`, `tox.ini` or a lockfile (`uv.lock`, `poetry.lock`, `pdm.lock`) |
+| Go | 5 | `go.mod`, `go.sum` or `go.work` |
+| Rust | 7 | `Cargo.toml`, `Cargo.lock` or `rust-toolchain.toml` |
+| JVM | 6 | `build.gradle.kts`, `build.gradle`, `settings.gradle.kts`, `settings.gradle`, `pom.xml` or `gradlew` |
+| .NET | 9 | `*.csproj`, `*.sln`, `*.slnx`, `Directory.Build.props`, `Directory.Packages.props`, `global.json` or `nuget.config` |
 
 Ask the skill to mount with the checks for tests and verification settings. From a clone of this repository the same mount is:
 

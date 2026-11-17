@@ -1,6 +1,6 @@
 ---
 type: knowledge
-summary: "Every published collet measurement: the first Claude Code run of 2026-11-16 with its loss, the fixture score, and the Codex and Antigravity results that do not exist yet; read before changing a published number."
+summary: "Every published collet measurement: the Claude Code run of 2026-11-16 with its loss, the fixture score, and the Codex and Antigravity results that do not exist yet; read before changing a published number."
 related_files:
   - README.md
   - assets/hero.svg
