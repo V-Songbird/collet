@@ -738,6 +738,22 @@ test('status and close name a guard call that did not finish, and close still cl
   const closed = task(root, ['close', '--left-out', 'nothing', '--unverified', 'nothing']);
   assert.equal(closed.status, 0, closed.stdout + closed.stderr);
   assert.match(closed.stdout, /did not finish[\s\S]*Bash rm -rf src/);
+  assert.doesNotMatch(closed.stdout, /judged no call/);
+});
+
+test('close says so when the guard judged no call during the task', () => {
+  const root = ready();
+  repo(root);
+  task(root, ['add', '--title', 'window', '--why', 'w', '--scope', 'src/cli.mjs']);
+  // Another task's record does not count for this one.
+  writeFileSync(
+    join(root, '.collet', 'guard-log.jsonl'),
+    `${JSON.stringify({ at: new Date().toISOString(), start: 'z', task: 't0', tool: 'Bash', call: 'ls' })}\n`,
+    'utf8'
+  );
+  const closed = task(root, ['close', '--left-out', 'nothing', '--unverified', 'nothing']);
+  assert.equal(closed.status, 0, closed.stdout + closed.stderr);
+  assert.match(closed.stdout, /judged no call during this task, so its hooks may not be running/);
 });
 
 test('a second task cannot be opened while one is still open', () => {
