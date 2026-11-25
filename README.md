@@ -58,7 +58,7 @@ You set Collet up once per project. Collet calls this mounting. It creates a `.c
 | You close the task | `node .collet/task.mjs close` compares your changes with the task. Then it runs the accept command, the command that must pass. A failure of either leaves the task open. |
 | You add a check | Every check ships with two test files: one holds the mistake, one comes close without making it. A check that fails either never counts. |
 
-[How Collet works](docs/knowledge/how-it-works.md) covers the whole mechanism.
+[How Collet works](docs/knowledge/how-it-works.md) has the rest.
 
 ## What you can do
 
@@ -95,7 +95,7 @@ Create `.collet/off` to silence every session guard. Committed checks keep runni
 
 ## Install
 
-Every host needs Node.js 22 or later and Git. Your project needs a Git repository with one commit, so Collet can compare changes.
+Every host needs Node.js 22 or later and Git. Your project needs a Git repository with one commit, for Collet's diffs.
 
 ### Claude Code
 
