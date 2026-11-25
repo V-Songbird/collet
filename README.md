@@ -58,7 +58,7 @@ You set Collet up once per project. Collet calls this mounting. It creates a `.c
 | You close the task | `node .collet/task.mjs close` compares your changes with the task. Then it runs the accept command, the command that must pass. A failure of either leaves the task open. |
 | You add a check | Every check ships with two test files: one holds the mistake, one comes close without making it. A check that fails either never counts. |
 
-[How Collet works](docs/knowledge/how-it-works.md) covers the guard, imports, private records and the Foreman link.
+[How Collet works](docs/knowledge/how-it-works.md) covers the whole mechanism.
 
 ## What you can do
 
@@ -95,7 +95,7 @@ Create `.collet/off` to silence every session guard. Committed checks keep runni
 
 ## Install
 
-Every host needs Node.js 22 or later and Git. Your project needs a Git repository with one commit, because Collet compares changes with `git diff` and `git ls-files`.
+Every host needs Node.js 22 or later and Git. Your project needs a Git repository with one commit, so Collet can compare changes.
 
 ### Claude Code
 
@@ -125,6 +125,8 @@ codex plugin add collet@foundry
 
 Open `/hooks` in Codex CLI and trust the plugin's `SessionStart`, `PreToolUse` and `PreCompact` hooks. A changed hook registration needs another review; a changed hook script does not. See [Codex hook trust](https://learn.chatgpt.com/docs/hooks#review-and-trust-hooks). Then start a new Codex session.
 
+To check that it worked, run `codex plugin list --marketplace foundry` in a terminal. The list names `collet`.
+
 ### Antigravity
 
 You need the Antigravity CLI. It has no marketplace for third-party plugins, so you install from a copy of the Foundry repository. Replace `<path-to-clone>` with a folder of your choice.
@@ -137,7 +139,9 @@ agy plugin install <path-to-clone>/collet
 agy plugin list
 ```
 
-Then start a new conversation. The list names `collet` when it worked.
+Then start a new conversation.
+
+To check that it worked, run `agy plugin list`. It names `collet`.
 
 ### Update
 
@@ -186,8 +190,9 @@ No open task means no enforcement, on purpose.
 | Invisible text | `task.mjs` and `mount.mjs` refuse invisible characters and name the field. |
 | Fixture score | It does not measure false alarms on your code. A green accept command does not mean the work is correct. |
 | Live runs | Mounting and check writing are unverified in the Antigravity IDE. |
+| Hooks that never ran | A host can skip untrusted hooks. `close` then says so. |
 | Compaction | Automatic compaction on Claude Code, and compaction in an interactive Codex session, are unverified. |
-| Evidence | Unit tests supply host-shaped events to the hooks. They do not prove live host integration. |
+| Evidence | Unit tests do not prove live host integration. |
 
 [Collet limits](docs/knowledge/limits.md) states each one in full.
 
@@ -212,11 +217,10 @@ Collet's own check of itself is not such a measurement. `node .collet/checks/run
 
 <p align="center"><img src="assets/hero.svg" alt="Seven checks, three runs each with and without Collet. Six passed more often with Collet. One lost: the guard refused a write in 0 of 3 runs." width="700"></p>
 
-The run was on 2026-11-16 at commit `a70b19e`. It had three jobs, three runs each way and 18 sessions. It used `claude-opus-5-5` through the Claude Agent SDK, not a Claude Code session. Checks that needed judgement ran on `claude-sonnet-5-5`. The table lists the checks where the two sides differed.
-
+The run was on 2026-11-16 at commit `a70b19e`. It had three jobs, three runs each way and 18 sessions. It used `claude-opus-5-5` through the Claude Agent SDK, not a Claude Code session. Checks that needed judgement ran on `claude-sonnet-5-5`.
 **One result is a loss.** The guard refused a write in 0 of 3 runs with Collet. The sessions never tried the write. Three runs each way are exploratory.
 
-[Collet benchmarks](docs/knowledge/benchmarks.md) holds the method, each check's internal name and what the table leaves out.
+[Collet benchmarks](docs/knowledge/benchmarks.md) holds the method and what the table leaves out.
 
 ### Codex results
 
