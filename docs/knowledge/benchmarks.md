@@ -9,7 +9,7 @@ related_files:
 
 # Collet benchmarks
 
-This page holds every measurement Collet publishes, with its method and its limits. The README shows the same table under [The numbers](../../README.md#the-numbers).
+This page holds every measurement Collet publishes, with its method and its limits. The README gives the lead result under [Does it work?](../../README.md#does-it-work).
 
 ## Contents
 
@@ -25,15 +25,15 @@ One run compared sessions with Collet against sessions without it, on Claude Cod
 The table lists every outcome grader where the arms differed. Graders that can only pass with the plugin by construction, such as the skill having fired or the mount script having run, are left out. Every other grader passed in all six runs of both arms, so those show nothing for the plugin.
 
 <!-- foundry:evidence {"platform":"Claude","status":"measured","models":["Claude Opus 5.5"],"source":"docs/knowledge/benchmarks.md","date":"2026-11-16","revision":"a70b19e","reviewedAt":"2026-11-16"} -->
-| Model | Case | Grader | With Collet | Without |
+| Model | Job (case) | What was checked (grader) | With Collet | Without |
 | --- | --- | --- | --- | --- |
-| Claude Opus 5.5 | `check-writer-admits-a-check` | `cart-unchanged` | 3/3 | 2/3 |
-| Claude Opus 5.5 | `check-writer-admits-a-check` | `check-admitted` | 3/3 | 2/3 |
-| Claude Opus 5.5 | `guard-refuses-out-of-scope-write` | `guard-refused` | 0/3 | not graded |
-| Claude Opus 5.5 | `mount-opens-first-task` | `config-filled` | 3/3 | 0/3 |
-| Claude Opus 5.5 | `mount-opens-first-task` | `first-task-open` | 3/3 | 0/3 |
-| Claude Opus 5.5 | `mount-opens-first-task` | `harness-proven` | 3/3 | 0/3 |
-| Claude Opus 5.5 | `mount-opens-first-task` | `rules-block-kept-map-text` | 3/3 | 0/3 |
+| Claude Opus 5.5 | Setting up a first task (`mount-opens-first-task`) | Settings filled in (`config-filled`) | 3/3 | 0/3 |
+| Claude Opus 5.5 | Setting up a first task (`mount-opens-first-task`) | First task opened (`first-task-open`) | 3/3 | 0/3 |
+| Claude Opus 5.5 | Setting up a first task (`mount-opens-first-task`) | Harness proven by its own checks (`harness-proven`) | 3/3 | 0/3 |
+| Claude Opus 5.5 | Setting up a first task (`mount-opens-first-task`) | Existing instructions kept (`rules-block-kept-map-text`) | 3/3 | 0/3 |
+| Claude Opus 5.5 | Writing a new check (`check-writer-admits-a-check`) | New check admitted (`check-admitted`) | 3/3 | 2/3 |
+| Claude Opus 5.5 | Writing a new check (`check-writer-admits-a-check`) | Cart code left untouched (`cart-unchanged`) | 3/3 | 2/3 |
+| Claude Opus 5.5 | Guarding a file outside the task (`guard-refuses-out-of-scope-write`) | Guard refused a write (`guard-refused`) | 0/3 | not graded |
 
 Three runs per arm are exploratory.
 
