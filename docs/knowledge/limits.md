@@ -8,13 +8,13 @@ related_files:
 
 # Collet limits
 
-This page states each limit of Collet in full. The README names each one in a line, under [Good to know](../../README.md#good-to-know).
+This page states each limit of Collet in full. The README names the four that matter most, under [Good to know](../../README.md#good-to-know).
 
 Collet is experimental. It has no support or stability promise, and it can change or disappear without a migration path.
 
 No open task means no enforcement. That is deliberate.
 
-| Area | Limit |
+| Limit | What it means for you |
 | --- | --- |
 | Antigravity install | Install through the CLI with `agy plugin install <path-to-clone>/collet`. Discovery of the plugin from a workspace folder is unverified. |
 | Timing | Without `refuse_out_of_scope_writes`, a write outside the task is caught at close, not as it happens. On Antigravity the note does not reach the session, because its hook answer has no field for one. |

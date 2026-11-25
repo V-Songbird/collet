@@ -10,9 +10,9 @@ related_files:
 
 # Collet settings
 
-This page lists every setting Collet reads, with its default and effect. The README shows the three most used ones under [Settings](../../README.md#settings).
+This page lists every setting Collet reads, with its default and effect. The README links it from [How to use it](../../README.md#how-to-use-it).
 
-Values live in `.collet/config.json`. No environment variable or secret is read by Collet's settings; the hooks use only the project directory your host names.
+Values live in `.collet/config.json`. After mounting, fill in the two required ones, `project` and `accept`: a task cannot open while either is a placeholder. No environment variable or secret is read by Collet's settings; the hooks use only the project directory your host names.
 
 | Name | Required | Default | What it does |
 | --- | --- | --- | --- |

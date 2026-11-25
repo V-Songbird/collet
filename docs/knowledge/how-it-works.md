@@ -12,10 +12,11 @@ related_files:
 
 # How Collet works
 
-This page says what Collet does to a coding session, part by part. It is for a user who wants to predict what Collet will allow, refuse or report. The short form is in the README, under [How it works](../../README.md#how-it-works).
+This page says what Collet does to a coding session, part by part. It is for a user who wants to predict what Collet will allow, refuse or report. The short form is in the README, under [What does it do?](../../README.md#what-does-it-do).
 
 ## Contents
 
+- [What you can do](#what-you-can-do)
 - [The mechanism](#the-mechanism)
 - [Private records and the mount's own writes](#private-records-and-the-mounts-own-writes)
 - [Mounting the harness](#mounting-the-harness)
@@ -23,6 +24,27 @@ This page says what Collet does to a coding session, part by part. It is for a u
 - [Open and close tasks](#open-and-close-tasks)
 - [Alongside a planning tool](#alongside-a-planning-tool)
 - [Optional language checks](#optional-language-checks)
+
+## What you can do
+
+| You want to | What to type |
+| --- | --- |
+| Inspect the task | `node .collet/task.mjs status` |
+| List every task | `node .collet/task.mjs list` |
+| Open a task | `node .collet/task.mjs add --title "..." --why "..." --scope "src/cart.mjs,test/**"` |
+| Add a file the open task needs | `node .collet/task.mjs widen --add <path> --why "<reason>"` |
+| Close the task | `node .collet/task.mjs close --left-out "..." --unverified "..."` |
+| Prove the checks still catch what they claim | `node .collet/checks/run.mjs` |
+| Check the working tree against the open task | `node .collet/checks/run.mjs --live` |
+
+These two go to the assistant:
+
+| You want to | Claude Code | Codex | Antigravity |
+| --- | --- | --- | --- |
+| Set Collet up in a project | `/collet:task-harness` | `$task-harness` | `/task-harness` |
+| Add a check for a recurring mistake | `/collet:check-writer help me catch skipped tests` | `$check-writer` | `/check-writer` |
+
+Every session knows its task, its files and how the task ends. A task cannot close while a change outside its files stands, and finished means a command passed, not that a summary says so. Add a check when a mistake repeats.
 
 ## The mechanism
 
