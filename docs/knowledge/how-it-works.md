@@ -1,6 +1,6 @@
 ---
 type: knowledge
-summary: "How collet keeps a session inside one task: the guard, scope by imports, mounting, opening and closing tasks, the Foreman link and the optional language checks; read to predict what collet will allow, refuse or report."
+summary: "How Collet keeps a session inside one task: the guard, scope by imports, mounting, opening and closing tasks, the Foreman link and the optional language checks; read to predict what Collet will allow, refuse or report."
 related_files:
   - README.md
   - hooks/guard.js

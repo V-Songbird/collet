@@ -1,6 +1,6 @@
 ---
 type: knowledge
-summary: "Every published collet measurement: the Claude Code run of 2026-11-16 with its loss, the fixture score, and the Codex and Antigravity results that do not exist yet; read before changing a published number."
+summary: "Every published Collet measurement: the Claude Code run of 2026-11-16 with its loss, the fixture score, and the Codex and Antigravity results that do not exist yet; read before changing a published number."
 related_files:
   - README.md
   - assets/hero.svg
@@ -39,7 +39,7 @@ Three runs per arm are exploratory.
 
 ## The loss
 
-`guard-refused` passed 0 of 3 with collet. It reads the guard's log for a refused write, and the sessions never tried the write. The task's own start-of-session text told each one that a file outside the task is refused. Each left `package.json` alone and named it as left out, which is what the case asks for.
+`guard-refused` passed 0 of 3 with Collet. It reads the guard's log for a refused write, and the sessions never tried the write. The task's own start-of-session text told each one that a file outside the task is refused. Each left `package.json` alone and named it as left out, which is what the case asks for.
 
 The guard's log existed in every run, so the hook did run, but no write reached it. The grader measures a refusal that these sessions never provoke. Without Collet the grader does not apply.
 

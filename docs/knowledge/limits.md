@@ -1,6 +1,6 @@
 ---
 type: knowledge
-summary: "Every current limit of collet in full: what the guard and the checks do not see, what closing needs, what a cut-short hook does, and which host behavior is observed, tested or unverified; read before relying on collet to stop a write, and before changing a guard or a check."
+summary: "Every current limit of Collet in full: what the guard and the checks do not see, what closing needs, what a cut-short hook does, and which host behavior is observed, tested or unverified; read before relying on Collet to stop a write, and before changing a guard or a check."
 related_files:
   - README.md
   - docs/knowledge/how-it-works.md
@@ -16,6 +16,7 @@ No open task means no enforcement. That is deliberate.
 
 | Area | Limit |
 | --- | --- |
+| Antigravity install | Install through the CLI with `agy plugin install <path-to-clone>/collet`. Discovery of the plugin from a workspace folder is unverified. |
 | Timing | Without `refuse_out_of_scope_writes`, a write outside the task is caught at close, not as it happens. On Antigravity the note does not reach the session, because its hook answer has no field for one. |
 | Antigravity guard | It reads shell commands through `run_command` and file writes through `write_to_file`, `replace_file_content`, `multi_replace_file_content`, `write_file` and `edit_file`. Antigravity CLI sent `write_file` for a created file and `edit_file` for an edit in a live payload. The refusal on those two names is checked by tests, not by a live session. Antigravity wires only the write guard: no session-start or compaction hook runs, so the open task reaches a session through the rules block and `node .collet/task.mjs status`. A call without workspace context needs an absolute tool path. |
 | Shell writes | The guard recognizes specific forms. A path built from a variable, a dynamic expression, or a file written by a program the command ran goes through. This narrows the hole and does not close it. `$PWD`, `${PWD}` and `%CD%` read as the call's working directory, and `~` as the home directory. A call whose working directory the host does not name leaves them unread. |
