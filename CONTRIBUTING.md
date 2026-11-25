@@ -124,7 +124,7 @@ Run this once after cloning:
 git config core.hooksPath scripts/git-hooks
 ```
 
-This enables a `pre-commit` hook that runs `node --test tests/*.test.js` and blocks the commit on failure. When a commit stages a Markdown file, it also blocks the commit while the root `README.md` lacks its navigation line, or while a link to a heading anchor in any tracked Markdown file no longer resolves. The two `.cjs` test files run under `node --test` and in CI, not at commit time.
+This enables a `pre-commit` hook that runs `node --test tests/*.test.js` and blocks the commit on failure. When a commit stages a Markdown file, it also blocks the commit while the root `README.md` lacks its navigation line, or while a link to a heading anchor in any tracked Markdown file no longer resolves. The `.cjs` test files run under `node --test` and in CI, not at commit time.
 
 Every Foundry plugin keeps byte-identical copies of the commit gates under `scripts/git-hooks/` and of the tests that cover them. A change to one goes into all of them. Collet's own `scripts/git-hooks/package.json`, which declares CommonJS, is the one file there that is not shared.
 
