@@ -152,7 +152,7 @@ In Claude Code, run these. Then start a new session:
 /plugin update collet@foundry
 ```
 
-In Codex, run these. Then start a new session and trust any changed hook in `/hooks`:
+In Codex, run these. Then start a new session. A changed hook stays off until you trust it again in `/hooks`:
 
 ```text
 codex plugin marketplace upgrade
@@ -218,6 +218,7 @@ Collet's own check of itself is not such a measurement. `node .collet/checks/run
 <p align="center"><img src="assets/hero.svg" alt="Seven checks, three runs each with and without Collet. Six passed more often with Collet. One lost: the guard refused a write in 0 of 3 runs." width="700"></p>
 
 The run was on 2026-11-16 at commit `a70b19e`. It had three jobs, three runs each way and 18 sessions. It used `claude-opus-5-5` through the Claude Agent SDK, not a Claude Code session. Checks that needed judgement ran on `claude-sonnet-5-5`.
+
 **One result is a loss.** The guard refused a write in 0 of 3 runs with Collet. The sessions never tried the write. Three runs each way are exploratory.
 
 [Collet benchmarks](docs/knowledge/benchmarks.md) holds the method and what the table leaves out.

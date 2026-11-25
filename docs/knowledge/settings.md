@@ -1,6 +1,6 @@
 ---
 type: knowledge
-summary: "Every collet setting in .collet/config.json, its default and effect, what the session start states, the kill switch and the text of a refused write; read before editing config.json."
+summary: "Every Collet setting in .collet/config.json, its default and effect, what the session start states, the kill switch and the text of a refused write; read before editing config.json."
 related_files:
   - README.md
   - templates/task.mjs

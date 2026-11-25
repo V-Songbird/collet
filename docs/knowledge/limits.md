@@ -1,6 +1,6 @@
 ---
 type: knowledge
-summary: "Every current limit of Collet in full: what the guard and the checks do not see, what closing needs, what a cut-short hook does, and which host behavior is observed, tested or unverified; read before relying on collet to stop a write, and before changing a guard or a check."
+summary: "Every current limit of Collet in full: what the guard and the checks do not see, what closing needs, what a cut-short hook does, and which host behavior is observed, tested or unverified; read before relying on Collet to stop a write, and before changing a guard or a check."
 related_files:
   - README.md
   - docs/knowledge/how-it-works.md

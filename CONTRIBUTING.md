@@ -25,6 +25,7 @@ plugin.json              # Antigravity metadata and the same version
 hooks.json               # Antigravity event wiring
 package.json             # makes every .js file an ES module
 .github/
+├── dependabot.yml       # weekly updates of the pinned actions
 └── workflows/
     └── test.yml         # CI: runs the test suite
 CONTRIBUTING.md          # this file
@@ -59,7 +60,7 @@ The README is the front page. The pages under `docs/knowledge/` hold the detail 
 
 **Skills are instruction files read by every host.** A change to a `SKILL.md` changes how Claude Code, Codex and Antigravity read the skill. Be precise, and try the affected skill in a real session of each host before a release.
 
-**Templates are copied into every project that mounts collet.** A change under `templates/` changes each later mount; cover it with a test and say so in the release notes.
+**Templates are copied into every project that mounts Collet.** A change under `templates/` changes each later mount; cover it with a test and say so in the release notes.
 
 **Hooks run on matching tool calls and session events.** Keep them fast, keep network calls out, and test on Windows, Linux and macOS. A new hook event needs an entry in `hooks/hooks.json`, `hooks/codex-hooks.json` and, when Antigravity has the event, the root `hooks.json`. Codex users must review and trust a new or changed hook in `/hooks`; say so in the release notes. Each Codex hook has one `command` and no `commandWindows`, because Codex fills in `${PLUGIN_ROOT}` itself.
 
